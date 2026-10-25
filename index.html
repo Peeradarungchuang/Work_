@@ -157,10 +157,20 @@ for(let i=-Math.floor((w-2)/2.4/2);i<=Math.floor((w-2)/2.4/2);i++){box(cx+i*2.4,
 if(fl>1)box(cx,fh-.15,z+d+.1,w+.1,.3,.12,0xdfe5ea,false);
 if(w>6){box(cx,0,z+d+.08,2.2,2.5,.1,0x28384a,false);box(cx,3.1,z+d+1.2,4.6,.2,2.4,rc);[-2,2].forEach(a=>box(cx+a,0,z+d+2.2,.15,3.1,.15,0xdddddd,false));box(cx+w/2-2,h+.35,cz,1.8,1.1,1.8,0x9aa3ab);box(cx-w/2+2,h+.35,cz,1.8,1.1,1.8,0x9aa3ab);}
 lab(name,cx,h+4,cz,ls);}
-bld(14,12,16,8,2,0xf1ece4,0x2e75b6,'สำนักงาน (Office)');
-bld(14,23,12,8,1,0xf7d9a8,0xc0392b,'โรงอาหาร (Cafeteria)');
+const GLS=new THREE.MeshStandardMaterial({color:0x9fd0ee,roughness:.1,transparent:true,opacity:.2,depthWrite:false});
+function boxR(x,y,z,w,h,d,c){const m=box(x,y,z,w,h,d,c);sc.remove(m);m.position.sub(roof.position);roof.add(m);return m;}
+function bldOpen(x,z,w,d,fl,wc,rc,name,ls=.8){const fh=3.8,h=fl*fh,cx=x+w/2,cz=z+d/2;
+box(cx,0,cz,w+.3,.5,d+.3,PL);box(cx,.5,cz,w-.3,.03,d-.3,0xe9e4da,false);
+for(let f=0;f<fl;f++){const y=f*fh,y0=f?y:.4;if(f)box(cx,y-.3,cz,w,.3,d,0xdfe5ea);
+[[cx,z+d,w,.25],[cx,z,w,.25],[x+w,cz,.25,d],[x,cz,.25,d]].forEach(([a,b,ww,dd],i)=>{const e=i<2;box(a,y0,b,ww,y+.9-y0,dd,wc);box(a,y+2.8,b,ww,fh-2.8,dd,wc);box(a,y+.9,b,e?ww:.06,1.9,e?.06:dd,GLS,false);
+for(let j=-2;j<=2;j++){const o=j*2.4;if(Math.abs(o)<(e?w:d)/2-.3)box(e?a+o:a,y+.9,e?b:b+o,.1,1.9,.1,0xe8eef3,false);}});}
+boxR(cx,h,cz,w+.8,.35,d+.8,rc);boxR(cx+w/2-2,h+.35,cz,1.8,1.1,1.8,0x9aa3ab);
+box(cx,.5,z+d+.08,2.2,2.3,.1,0x28384a,false);box(cx,3.1,z+d+1.2,4.6,.2,2.4,rc);[-2,2].forEach(a=>box(cx+a,0,z+d+2.2,.15,3.1,.15,0xdddddd,false));
+lab(name,cx,h+4,cz,ls);}
+bldOpen(14,12,12,8,2,0xf1ece4,0x2e75b6,'สำนักงาน (Office)');
+bldOpen(14,23,12,8,1,0xf7d9a8,0xc0392b,'โรงอาหาร (Cafeteria)');
 // ที่พักผ่อนพนักงาน: ศาลา + ต้นไม้ + ม้านั่ง
-box(31,0,21,8,.15,8,0xb6d89a,false);[[28,18],[34,18],[28,24],[34,24]].forEach(([x,z])=>box(x,0,z,.4,3,.4,0x8b5a2b));box(31,3,21,8.6,.35,8.6,0xc07a3f);lab('ที่พักผ่อนพนักงาน',31,7.4,21,.8);
+box(31,0,21,8,.15,8,0xb6d89a,false);[[28,18],[34,18],[28,24],[34,24]].forEach(([x,z])=>box(x,0,z,.4,3,.4,0x8b5a2b));boxR(31,3,21,8.6,.35,8.6,0xc07a3f);box(31,.28,21,7.6,.06,7.6,0xd8c7a3,false);lab('ที่พักผ่อนพนักงาน',31,7.4,21,.8);
 const GM=[0x2f7d32,0x3f8f3a,0x58a64a,0x2a6b2d,0x6bb04f].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:.9,flatShading:true}));
 const TG=new THREE.IcosahedronGeometry(1,1),CG=new THREE.ConeGeometry(1,1,9),TK=new THREE.CylinderGeometry(.16,.26,1,6),tkm=M(0x6b4a2b);
 function tree(x,z,s=1,t=Math.floor(Math.random()*3)){const g=new THREE.Group(),tk=new THREE.Mesh(TK,tkm);tk.scale.set(s,2.6*s,s);tk.position.y=1.3*s;tk.castShadow=true;g.add(tk);
@@ -173,7 +183,7 @@ function belt(x1,z1,x2,z2,gap,j=2){const n=Math.floor(Math.hypot(x2-x1,z2-z1)/ga
 [-6,-13].forEach(x=>belt(x,-14,x,102,6));[114,121].forEach(x=>belt(x,-14,x,102,6));
 [-6,-13].forEach(z=>belt(-6,z,114,z,6));[138,145].forEach(z=>belt(-90,z,200,z,7));[-6,-13].forEach(x=>belt(x,138,x,160,7));
 // สนามหญ้า + สวนในไซต์
-P(12,9,24,22,0x82bd5c,.2,.08);[[27,14],[35,14],[35,28],[16,34],[30,33.5],[34,12],[23,10]].forEach(([x,z])=>tree(x,z,.9+rnd()*.3));
+P(12,9,24,22,0x82bd5c,.2,.08);[[27.5,10.5],[35.3,10.3],[35,28],[16,34],[30,33.5],[23,10]].forEach(([x,z])=>tree(x,z,.9+rnd()*.3));
 for(let z=36;z<80;z+=5)if(z<53||z>58)tree(11.2,z,.55+rnd()*.15,1);
 // แนวพุ่มไม้ข้างทางเดิน
 for(let z=36;z<84;z+=2){if(z>53&&z<60)continue;box(12.6,.25,z,.7,.7,1.6,0x2f7d32,false);}
@@ -257,6 +267,52 @@ const vc=[0xff6a00,0x2b5aa8,0xf0f0f0,0x27ae60,0xc0392b];
 for(let n=0;n<14;n++){const p=person(vc[n%5]);p.userData={path:paths[n%4],d:n*7,sp:1.6+Math.random()*.4};PPL.push(p);}
 // คนงานในโซนหยิบแพ็ค
 for(let i=0;i<15;i++){const p=person(vc[i%5]);p.position.set(OX+46+(i%5)*3.2,0,OZ+16+Math.floor(i/5)*2.8+.4);p.userData={stat:1,ph:i,hx:p.position.x,hz:p.position.z};PPL.push(p);}
+// ===== รายละเอียดภายในอาคารพนักงาน / ที่พักผ่อน / จุดสูบบุหรี่ / โรงอาหาร =====
+const SIT=[],SY=-.38,K=(g,x,y,z,w,h,d,c)=>bxg(g,x,y+h/2,z,w,h,d,c.isMaterial?c:M(c));
+const ST=(x,y,z,ry,c)=>{const p=person(c);p.position.set(x,y,z);p.rotation.y=ry;return p;};
+function sit(p){p.legs.forEach(l=>{l.rotation.x=-1.57;l.scale.y=.55;l.children[1].visible=false;[[.67,.48,.45,.22],[.42,.53,.12,.34]].forEach(([y,z,h,d],j)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(j?.22:.2,h,d),M(j?0x151515:0x2b3440));m.position.set(l.position.x,y,z);p.add(m);});});}
+function SP(par,x,y,z,ry,c,arm=-1.07){const p=person(c);sit(p);p.position.set(x,y+SY,z);p.rotation.y=ry;p.arms.forEach(a=>a.rotation.x=arm);if(par!==sc)par.add(p);return p;}
+function ws(x,y,z,ry,k,c){const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=ry;sc.add(g);
+K(g,0,.4,-.05,.46,.06,.46,0x2a2a2a);K(g,0,.46,-.28,.46,.5,.06,0x2a2a2a);K(g,0,0,-.05,.06,.4,.06,0x2a2a2a);
+K(g,0,.72,.8,1.5,.05,.8,0xc89b6a);[-.7,.7].forEach(a=>K(g,a,0,.8,.05,.72,.7,0x666666));
+K(g,.35,.77,.75,.3,.012,.4,0xffffff);K(g,.5,.78,.85,.3,.012,.4,0xf3f3f3);K(g,.62,.79,.95,.26,.03,.34,c);
+if(k){K(g,-.3,.77,.7,.32,.012,.42,0xffffff);K(g,-.2,.78,.9,.3,.012,.4,0xfafafa);}else{K(g,-.3,.77,1.1,.08,.2,.05,0x333333);K(g,-.3,.95,1.1,.5,.3,.03,0x111111);K(g,-.3,.97,1.085,.44,.25,.01,0x7ec8ff);K(g,-.3,.77,.65,.4,.02,.14,0xdddddd);}
+const p=SP(g,0,0,0,0,c),ph=x+z;
+SIT.push(t=>{if(k){p.arms[1].rotation.x=-1+Math.sin(t*4+ph)*.1;p.arms[0].rotation.x=-.85;}else p.arms.forEach((a,i)=>a.rotation.x=-1.07+Math.sin(t*9+ph+i*2)*.07);});}
+// ออฟฟิศ ชั้น 1 และ 2: โต๊ะทำงานเอกสาร
+const O1=.53,O2=3.8;
+[[17,0],[20,1],[23,0]].forEach(([x,k],i)=>{ws(x,O1,13,0,k,vc[i]);ws(x,O2,13,0,1-k,vc[i+2]);ws(x,O1,19.1,Math.PI,(i+1)%2,vc[(i+3)%5]);});
+[14.5,15.4,16.3].forEach(z=>[O1,O2].forEach(y=>K(sc,25.3,y,z,.5,1.4,.8,0x8f98a0)));
+[O1,O2].forEach(y=>{K(sc,15,y,16.5,.6,1,.9,0xd0d0d0);K(sc,15,y+1,16.5,.62,.1,.92,0x444444);});
+K(sc,20,O2,17.2,.2,.72,.2,0x555555);K(sc,20,O2+.72,17.2,3,.06,1.1,0xc89b6a);K(sc,19,O2+.78,17.2,.35,.01,.45,0xffffff);K(sc,21,O2+.78,17.1,.35,.01,.45,0xf3f3f3);
+[[18.8,16.2,0],[21.2,16.2,0],[19,18.3,Math.PI],[21.2,18.3,Math.PI]].forEach(([x,z,ry],i)=>{const p=ST(x,O2,z,ry,vc[i]);p.arms.forEach(a=>a.rotation.x=-.9);SIT.push(t=>{p.arms[1].rotation.x=-1+Math.sin(t*2+i*2)*.3;});});
+{const p=person(vc[1]);p.userData={path:[[16.5,15.8],[22.5,15.8],[24.2,15.8]],d:0,sp:1.2,y0:O1};bxg(p,0,1.1,.4,.3,.02,.38,M(0xffffff));PPL.push(p);}
+// ที่พักผ่อน: โต๊ะ เก้าอี้ ม้านั่ง พนักงานพักผ่อน
+const R0=.34;
+K(sc,31,R0,21,.12,.72,.12,0x555555);K(sc,31,R0+.72,21,1.5,.05,1.5,0xc89b6a);[[30.6,21.3,0xffffff],[31.4,20.7,0xe0a800],[31.2,21.4,0xd34a2f]].forEach(([x,z,c])=>K(sc,x,R0+.77,z,.1,.12,.1,c));
+[[29.8,21,Math.PI/2],[32.2,21,-Math.PI/2],[31,19.8,0],[31,22.2,Math.PI]].forEach(([x,z,ry],i)=>{K(sc,x,R0,z,.4,.46,.4,0x8a5a2b);const p=SP(sc,x,R0,z,ry,vc[i%5]);SIT.push(t=>{p.arms[1].rotation.x=Math.sin(t*.8+i*2)>.6?-1.9:-1;p.arms[0].rotation.x=-.9;});});
+K(sc,28.7,R0,21,.5,.45,2,0x8b5a2b);K(sc,33.4,R0,21,.5,.45,1.6,0x8b5a2b);
+[[20.4,1],[21.6,0]].forEach(([z,r],i)=>{const p=SP(sc,28.75,R0,z,Math.PI/2,vc[(i+1)%5],-.7);SIT.push(t=>{p.arms[0].rotation.x=p.arms[1].rotation.x=r?-2.9:-.8+Math.sin(t+z)*.05;});});
+{const p=SP(sc,33.4,R0,21,-Math.PI/2,vc[3],-1.2);bxg(p.arms[1],0,-.66,0,.06,.1,.02,M(0x111111));const q=ST(33.2,R0,18.9,0,vc[4]);q.arms[1].rotation.x=-1.4;bxg(q.arms[1],0,-.66,0,.06,.1,.02,M(0x111111));}
+// จุดสูบบุหรี่พนักงาน (ข้างที่พักผ่อน)
+box(31.5,.28,12.5,6,.04,3.6,0xcfd2d4,false);[[29,11],[34,11],[29,14],[34,14]].forEach(([x,z])=>K(sc,x,.32,z,.15,2.6,.15,0x666b70));boxR(31.5,2.9,12.5,6.4,.25,4,0x707880);
+lab('จุดสูบบุหรี่พนักงาน',31.5,5.2,12.5,.7,'#fff','rgba(90,90,90,.95)');
+[[30,11.6],[33.2,11.6]].forEach(([x,z])=>{K(sc,x,.32,z,.08,.9,.08,0x555555);K(sc,x,1.22,z,.4,.12,.4,0x333333);K(sc,x,1.34,z,.1,.02,.1,0xff3b00);});K(sc,31.5,.32,13.7,2.6,.45,.5,0x6b4a2b);
+function smoker(x,y,z,ry,k,seat){const p=seat?SP(sc,x,y,z,ry,vc[k%5],-.7):ST(x,y,z,ry,vc[k%5]);
+bxg(p.arms[1],0,-.74,0,.03,.12,.03,M(0xffffff));bxg(p.arms[1],0,-.81,0,.04,.03,.04,M(0xff4400));
+const pf=[0,1,2].map(()=>{const m=new THREE.Mesh(new THREE.SphereGeometry(.1,6,6),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.4,depthWrite:false}));sc.add(m);return m;});
+SIT.push(t=>{p.arms[1].rotation.x=Math.sin(t*.7+k)>.4?-1.9:-.9;p.arms[0].rotation.x=-.5;
+pf.forEach((m,i)=>{const u=(t*.3+i/3+k*.2)%1;m.position.set(p.position.x+Math.sin(ry)*.5+Math.sin(u*5+i)*.2,y+(seat?1.4:1.75)+u*1.4,p.position.z+Math.cos(ry)*.5);m.scale.setScalar(.6+u*2.4);m.material.opacity=(1-u)*.4;});});}
+smoker(30.4,.32,12.3,Math.PI/2,1);smoker(32.4,.32,12,-Math.PI/2,2);smoker(31.5,.32,13.7,Math.PI,3,1);
+// โรงอาหาร: เคาน์เตอร์ตักข้าว แถวต่อคิว โต๊ะอาหาร
+K(sc,19.5,.53,25.2,7.4,.95,.8,0xb0b7bd);K(sc,19.5,1.48,25.2,7.5,.06,.9,0x8a6a45);
+[16.6,18.3,20,21.7,23.4].forEach((x,i)=>{K(sc,x,1.54,25.2,1.4,.16,.55,0xc9ccd0);K(sc,x,1.7,25.2,1.2,.05,.45,[0xf6f1e0,0xd9822b,0x4c9a3a,0xb5452b,0xe8c34a][i]);});
+K(sc,19.5,1.6,25.6,7.4,.5,.03,GLS);lab('จุดตักข้าว-อาหาร',19.5,5.6,24.5,.5);
+[17.2,21.4].forEach(x=>{const p=ST(x,.53,24.1,0,0xf0f0f0);p.arms.forEach(a=>a.rotation.x=-.9);SIT.push(t=>{p.arms[1].rotation.x=-.9+Math.sin(t*2+x)*.35;});});
+for(let i=0;i<5;i++){const p=ST(16.4,.53,26.3+.9*i,Math.PI,vc[i%5]);p.arms.forEach(a=>a.rotation.x=-.8);bxg(p,0,1,.45,.5,.03,.35,M(0x9aa3ab));SIT.push(t=>{p.position.y=.53+Math.abs(Math.sin(t*1.5+i))*.02;});}
+[19.4,23.2].forEach((tx,ti)=>{K(sc,tx,.53,27.4,.12,.72,.12,0x555555);K(sc,tx,1.25,27.4,2.4,.05,.9,0xe3d3b0);
+[-.6,.6].forEach((o,j)=>[[26.45,0],[28.35,Math.PI]].forEach(([z,ry],s)=>{const x=tx+o;K(sc,x,.53,z,.4,.46,.4,0x8a5a2b);const p=SP(sc,x,.53,z,ry,vc[(ti*4+j*2+s)%5]);const pz=z+(s?-.55:.55);K(sc,x,1.3,pz,.3,.02,.3,0xffffff);K(sc,x,1.32,pz,.18,.06,.18,0xf6f1e0);const ph=x+z;SIT.push(t=>{p.arms[1].rotation.x=Math.sin(t*1.6+ph)>.55?-1.9:-1;p.arms[0].rotation.x=-.9;});}));});
+[0,1].forEach(i=>{const p=person(vc[i+1]);p.userData={path:[[17.5,26.3],[17.5,30.3],[20.3,30.3]],d:i*9,sp:1.1,y0:.53};bxg(p,0,1,.45,.5,.03,.35,M(0x9aa3ab));PPL.push(p);});
 // โฟล์คลิฟท์วิ่งในเส้นทางสีเขียว (วนในโซนเดิน)
 const FL2=[0,1,2].map(i=>{const f=forklift(0xf5b800,i!=1);f.userData={t:i*30};sc.add(f);return f;});
 const loops=[[[OX+3,OZ+13],[OX+60,OZ+13],[OX+60,OZ+19],[OX+3,OZ+19],[OX+3,OZ+13]],[[OX+34,OZ+16],[OX+34,OZ+33],[OX+3,OZ+33],[OX+3,OZ+34],[OX+34,OZ+34],[OX+34,OZ+16]],[[OX+3,OZ+32.8],[OX+62,OZ+32.8],[OX+62,OZ+33.7],[OX+3,OZ+33.7],[OX+3,OZ+32.8]]];
@@ -273,6 +329,9 @@ btn('ที่จอด/เกต',()=>view([-10,28,125],[20,0,80]));
 btn('ถนนใหญ่/ทางเข้า',()=>view([-45,34,150],[8,0,108]));
 btn('ลานจอดรถพนักงาน',()=>view([27,16,108],[27,0,93]));
 btn('อาคารสำนักงาน',()=>view([34,15,42],[22,3,18]));
+btn('ภายในอาคารพนักงาน',()=>{roof.visible=false;roofBtn.classList.remove('on');view([20,19,38],[20,2,16]);});
+btn('โรงอาหาร',()=>{roof.visible=false;roofBtn.classList.remove('on');view([20,17,40],[20,0,27]);});
+btn('พักผ่อน/จุดสูบบุหรี่',()=>{roof.visible=false;roofBtn.classList.remove('on');view([40,15,30],[31,0,16]);});
 btn('ทางหนีไฟ EXIT 1',()=>view([8,15,66],[36,2,52]));btn('ทางหนีไฟ EXIT 2',()=>view([130,17,72],[100,2,59]));
 btn('ซ้อมหนีไฟ',b=>{setDrill(!drill);b.classList.toggle('on',drill);if(drill){roof.visible=false;roofBtn.classList.remove('on');view([70,70,95],[68,0,50]);}});
 btn('จุดเก็บขยะ',()=>view([52,24,106],[28,0,84]));
@@ -283,7 +342,7 @@ function rs(){const w=innerWidth,h=innerHeight;rd.setSize(w,h,false);cam.aspect=
 addEventListener('resize',rs);rs();
 // ---------- animation ----------
 const clk=new THREE.Clock();let T=0,st_t=0;
-function tick(){const dt=Math.min(clk.getDelta(),.05);T+=dt;
+function tick(){const dt=Math.min(clk.getDelta(),.05);T+=dt;SIT.forEach(f=>f(T));
 let blk=0;
 TR.forEach(t=>{const u=t.userData;if(u.t<0){u.t+=dt*10;t.visible=false;return;}t.visible=true;const a=u.p[u.i],b=u.p[u.i+1];if(!b){u.i=0;u.t=-(u.rep||60);u.prog=0;t.visible=false;t.position.set(u.p[0][0],0,u.p[0][1]);t.rotation.y=Math.PI/2;return;}if(u.w>0){u.w-=dt;return;}
 const dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz)||1,rev=b[2]=='r'||b[2]=='park';
@@ -296,7 +355,7 @@ AMB.forEach(v=>{v.position.x+=v.userData.d*v.userData.sp*dt;if(v.position.x>240)
 st_t=(st_t||0)+dt;if(st_t>.4){st_t=0;const g=GT.userData,inn=TR.filter(t=>t!==GT&&t.visible&&t.position.x>0&&t.position.x<108&&t.position.z>0&&t.position.z<106).length;
 let m='ไม่มีรถเก็บขยะในขณะนี้';if(GT.visible){m=g.w>0?'<b>กำลังเก็บขยะ</b> ที่จุดทิ้งขยะ (ถนนบริการแยกจากถนนรถบรรทุก)':blk?'รถเก็บขยะรอให้ทางรถบรรทุก ที่ทางแยกบริการ':g.i<=4?'รถเก็บขยะกำลังเลี้ยวซ้ายเข้าเกต':g.i<9?'รถเก็บขยะวิ่งเข้าถนนบริการ':g.i<14?'รถเก็บขยะวนออกถนนบริการ':'รถเก็บขยะกำลังออกจากคลัง';}
 document.getElementById('st').innerHTML='รถบรรทุกในคลัง: <b>'+inn+'</b> คัน<br>รถเก็บขยะ: '+m+'<br>จราจรในคลัง: <b>ไหลคล่อง ไม่มีรถติด</b>'+(drill?'<br><b>ซ้อมหนีไฟ:</b> พนักงานออกทาง EXIT 1 / EXIT 2 ไปจุดรวมพล':'');}
-PPL.forEach(p=>{const u=p.userData;if(u.stat){if(drill&&u.route){u.rd=Math.min(u.rd+3.4*dt,u.rl);const q=along(u.route,u.rd-.001);p.position.set(q[0],Math.abs(Math.sin(T*10+u.ph))*.07,q[1]);p.rotation.y=q[2];const w=u.rd>=u.rl?0:Math.sin(T*10+u.ph)*.7;p.legs[0].rotation.x=w;p.legs[1].rotation.x=-w;p.arms[0].rotation.x=-w;p.arms[1].rotation.x=w;u.moved=1;}else{if(u.moved){p.position.set(u.hx,0,u.hz);p.legs[0].rotation.x=p.legs[1].rotation.x=p.arms[0].rotation.x=p.arms[1].rotation.x=0;u.moved=0;}p.position.y=Math.abs(Math.sin(T*2+u.ph))*.04;p.rotation.y=Math.PI;}return;}u.d+=u.sp*dt;let pa=u.path;const L=pa.reduce((s,q,i)=>i?s+Math.hypot(q[0]-pa[i-1][0],q[1]-pa[i-1][1]):0,0);const s=u.d%(L*2);const q=along(pa,s<L?s:2*L-s);p.position.set(q[0],Math.abs(Math.sin(T*8+u.d))*.06,q[1]);p.rotation.y=q[2]+(s<L?0:Math.PI);const w=Math.sin(T*8+u.d)*.6;p.legs[0].rotation.x=w;p.legs[1].rotation.x=-w;p.arms[0].rotation.x=-w*.8;p.arms[1].rotation.x=w*.8;});
+PPL.forEach(p=>{const u=p.userData;if(u.stat){if(drill&&u.route){u.rd=Math.min(u.rd+3.4*dt,u.rl);const q=along(u.route,u.rd-.001);p.position.set(q[0],Math.abs(Math.sin(T*10+u.ph))*.07,q[1]);p.rotation.y=q[2];const w=u.rd>=u.rl?0:Math.sin(T*10+u.ph)*.7;p.legs[0].rotation.x=w;p.legs[1].rotation.x=-w;p.arms[0].rotation.x=-w;p.arms[1].rotation.x=w;u.moved=1;}else{if(u.moved){p.position.set(u.hx,0,u.hz);p.legs[0].rotation.x=p.legs[1].rotation.x=p.arms[0].rotation.x=p.arms[1].rotation.x=0;u.moved=0;}p.position.y=Math.abs(Math.sin(T*2+u.ph))*.04;p.rotation.y=Math.PI;}return;}u.d+=u.sp*dt;let pa=u.path;const L=pa.reduce((s,q,i)=>i?s+Math.hypot(q[0]-pa[i-1][0],q[1]-pa[i-1][1]):0,0);const s=u.d%(L*2);const q=along(pa,s<L?s:2*L-s);p.position.set(q[0],(u.y0||0)+Math.abs(Math.sin(T*8+u.d))*.06,q[1]);p.rotation.y=q[2]+(s<L?0:Math.PI);const w=Math.sin(T*8+u.d)*.6;p.legs[0].rotation.x=w;p.legs[1].rotation.x=-w;p.arms[0].rotation.x=-w*.8;p.arms[1].rotation.x=w*.8;});
 FL2.forEach((f,i)=>{f.bc.visible=Math.sin(T*9)>0;f.userData.t+=dt*3.2;const q=along(loops[i],f.userData.t);f.position.set(q[0],0,q[1]);f.rotation.y=q[2];});
 oc.update();rd.render(sc,cam);requestAnimationFrame(tick);}
 tick();(document.fonts&&document.fonts.load?document.fonts.load('700 40px "Noto Sans Thai"','ภาษาไทย'):Promise.resolve()).then(()=>labs.forEach(draw)).catch(()=>{});
