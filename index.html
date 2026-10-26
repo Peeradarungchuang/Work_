@@ -24,7 +24,7 @@ html,body{height:100%;margin:0;background:var(--bg);font-family:'Noto Sans Thai'
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 // ---------- ผังจริงจากชีต Layout (1 ช่อง = 1x1 ม.) [ชนิด,col,row,กว้าง,ยาว] ----------
-const R=[["b",0,0,2,10],["c",2,0,5,5],["b",7,0,1,10],["c",8,0,5,5],["b",13,0,1,10],["c",14,0,5,5],["b",19,0,1,10],["c",20,0,5,5],["b",25,0,1,10],["c",26,0,5,5],["b",31,0,1,10],["c",32,0,5,5],["b",37,0,1,10],["c",38,0,5,5],["b",43,0,1,10],["c",44,0,5,5],["b",49,0,1,10],["c",50,0,5,5],["b",55,0,1,10],["c",56,0,5,5],["b",61,0,3,10],["d",2,5,5,5],["d",8,5,5,5],["d",14,5,5,5],["d",20,5,5,5],["d",26,5,5,5],["d",32,5,5,5],["d",38,5,5,5],["d",44,5,5,5],["d",50,5,5,5],["d",56,5,5,5],["f",2,12,30,20],["g",36,12,3,14],["h",41,12,1,6],["h",43,12,1,5],["i",45,12,17,10],["j",45,22,17,5],["k",45,28,15,4],["b",0,34,2,10],["d",2,34,5,5],["b",7,34,1,10],["d",8,34,5,5],["b",13,34,1,10],["d",14,34,5,5],["b",19,34,1,10],["d",20,34,5,5],["b",25,34,1,10],["d",26,34,5,5],["b",31,34,1,10],["d",32,34,5,5],["b",37,34,1,10],["d",38,34,5,5],["b",43,34,1,10],["d",44,34,5,5],["b",49,34,1,10],["d",50,34,5,5],["b",55,34,1,10],["d",56,34,5,5],["b",61,34,3,10],["c",2,39,5,5],["c",8,39,5,5],["c",14,39,5,5],["c",20,39,5,5],["c",26,39,5,5],["c",32,39,5,5],["c",38,39,5,5],["c",44,39,5,5],["c",50,39,5,5],["c",56,39,5,5],["p",37,27,3,3],["p",41,27,3,3],["x",0,21,1,2],["x",63,28,1,2]];
+const R=[["b",0,0,2,10],["c",2,0,5,5],["b",7,0,1,10],["c",8,0,5,5],["b",13,0,1,10],["c",14,0,5,5],["b",19,0,1,10],["c",20,0,5,5],["b",25,0,1,10],["c",26,0,5,5],["b",31,0,1,10],["c",32,0,5,5],["b",37,0,1,10],["c",38,0,5,5],["b",43,0,1,10],["c",44,0,5,5],["b",49,0,1,10],["c",50,0,5,5],["b",55,0,1,10],["c",56,0,5,5],["b",61,0,3,10],["d",2,5,5,5],["d",8,5,5,5],["d",14,5,5,5],["d",20,5,5,5],["d",26,5,5,5],["d",32,5,5,5],["d",38,5,5,5],["d",44,5,5,5],["d",50,5,5,5],["d",56,5,5,5],["f",2,12,12,20],["f",16,12,12,20],["f",30,12,6,20],["g",37,12,2,14],["g",40,12,1,14],["h",41,12,1,6],["h",43,12,1,5],["i",45,12,17,10],["j",45,22,17,5],["k",45,28,15,4],["b",0,34,2,10],["d",2,34,5,5],["b",7,34,1,10],["d",8,34,5,5],["b",13,34,1,10],["d",14,34,5,5],["b",19,34,1,10],["d",20,34,5,5],["b",25,34,1,10],["d",26,34,5,5],["b",31,34,1,10],["d",32,34,5,5],["b",37,34,1,10],["d",38,34,5,5],["b",43,34,1,10],["d",44,34,5,5],["b",49,34,1,10],["d",50,34,5,5],["b",55,34,1,10],["d",56,34,5,5],["b",61,34,3,10],["c",2,39,5,5],["c",8,39,5,5],["c",14,39,5,5],["c",20,39,5,5],["c",26,39,5,5],["c",32,39,5,5],["c",38,39,5,5],["c",44,39,5,5],["c",50,39,5,5],["c",56,39,5,5],["p",37,27,3,3],["p",41,27,3,3],["x",0,21,1,2],["x",63,28,1,2]];
 const COL={b:0xd9d9d9,c:0xe6c84f,d:0xffc000,e:0x548235,f:0xed7d31,g:0xc00000,h:0x2e75b6,i:0xb4a7d6,j:0xf8cbad,k:0xbdd7ee,p:0x7030a0,x:0xff0000};
 const LG=[["c","ท่าขึ้น-ลงสินค้า (Unload / Loading)"],["d","ตรวจสินค้า IB / OB Check"],["f","Floor Stage – น้ำดื่ม (50 ตำแหน่ง)"],["g","Selective Rack – ขนม (42 ตำแหน่ง)"],["h","AS/RS – เครื่องเขียน (11 ตำแหน่ง)"],["i","Picking / Packing"],["j","Packing Material"],["k","MHE Parking"],["p","Clean 1 / Clean 2 (ห้อง 3x3 ม.)"],["x","EXIT 1 / EXIT 2 ทางหนีไฟ (กว้าง 2 ม.)"],["e","เส้นทางวิ่งโฟล์คลิฟท์"]];
 const OX=36,OZ=30,W=64,D=44; // อาคาร: x 36..100, z 30..74 (ท่ารับ=เหนือ, ท่าส่ง=ใต้)
@@ -106,6 +106,16 @@ const dm=M(0xcfd6dc);
 dc.forEach((c,i)=>{box(OX+c+2.5,6.3,OZ-1.4,5.6,.25,2.8,0x39485a);box(OX+c+2.5,6.3,OZ+D+1.4,5.6,.25,2.8,0x39485a);[OZ,OZ+D].forEach((z,s)=>{const o=box(OX+c+2.5,.3,z+(s?-.15:.15),5,.9,.3,0x4d5560,false);box(OX+c+2.5,5.5,z,5,.3,.3,0xe0a800,false);
 });lab('IN '+(i+1),OX+c+2.5,16,OZ-1,.45);lab('OUT '+(i+1),OX+c+2.5,16,OZ+D+1,.45);});
 lab('ศูนย์กระจายสินค้า (Distribution Center)',OX-.5,17.5,OZ+D/2,1.6,'#fff','rgba(46,117,182,.92)');
+// ---------- Strip curtain ทุกประตูท่า IN/OUT + กล้อง CCTV ----------
+const CUR=[];
+{const sg=new THREE.BoxGeometry(.32,5.2,.04),sm=new THREE.MeshStandardMaterial({color:0xcfe9f7,transparent:true,opacity:.55,roughness:.3,depthWrite:false});
+dc.forEach((c,i)=>[OZ,OZ+D].forEach((z,s)=>{const x0=OX+c,zz=z+(s?.1:-.1);box(x0+2.5,5.8,z,5,WH-7.8,.5,wm);box(x0+2.5,5.5,zz,5.1,.14,.16,0x333b44,false);
+for(let k=0;k<16;k++){const pv=new THREE.Group();pv.position.set(x0+.16+k*.3125,5.5,zz);const m=new THREE.Mesh(sg,sm);m.position.y=-2.6;pv.add(m);sc.add(pv);CUR.push(t=>{pv.rotation.x=Math.sin(t*1.1+k*.5+i+s)*.03;});}}));}
+function cctv(x,y,z,yaw,pitch=.35,sw=.5,pole=0){const g=new THREE.Group();g.position.set(x,y,z);sc.add(g);if(pole)bxg(g,0,-pole/2,0,.14,pole,.14,M(0x7a828a));bxg(g,0,0,0,.3,.1,.3,M(0x555b62));
+const h=new THREE.Group();h.rotation.x=pitch;g.add(h);bxg(h,0,.02,.35,.3,.28,.75,M(0xf4f4f4));bxg(h,0,.18,.4,.34,.05,.82,M(0xdcdcdc));
+const ln=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,.08,14),M(0x111111));ln.rotation.x=Math.PI/2;ln.position.set(0,.02,.76);h.add(ln);
+const led=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),new THREE.MeshBasicMaterial({color:0xff2200}));led.position.set(.1,.12,.72);h.add(led);
+CUR.push(t=>{g.rotation.y=yaw+Math.sin(t*.6+x)*sw;led.visible=Math.sin(t*5)>0;});}
 // หลังคา (สลับเปิด-ปิด)
 const roof=new THREE.Mesh(new THREE.BoxGeometry(W+1.5,.6,D+1.5),new THREE.MeshStandardMaterial({color:0xaab6c2,roughness:.55,metalness:.2}));roof.position.set(OX+W/2,WH+.6,OZ+D/2);roof.castShadow=true;sc.add(roof);
 for(let i=0;i<33;i++){const r=new THREE.Mesh(new THREE.BoxGeometry(.25,.22,D+1.5),M(0x8997a5));r.position.set(-W/2+.4+i*2,.4,0);roof.add(r);}
@@ -115,14 +125,28 @@ const dm4=new THREE.Matrix4();
 function inst(n,c){const m=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),M(c),n);m.castShadow=m.receiveShadow=true;m.count=0;sc.add(m);m.add=(x,y,z,w,h,d)=>{dm4.compose(new THREE.Vector3(x,y,z),new THREE.Quaternion(),new THREE.Vector3(w,h,d));m.setMatrixAt(m.count++,dm4);};return m;}
 // Floor Stage น้ำดื่ม: 10x5 ตำแหน่ง ละ 3x4 ม. ซ้อน 3 ชั้น (12 พาเลท/ตำแหน่ง)
 const iw=inst(1700,0x3d8fd1),ip=inst(1700,0xc99a5b);
-for(let a=0;a<10;a++)for(let b=0;b<5;b++)for(let px=0;px<3;px++)for(let pz=0;pz<4;pz++)for(let L=0;L<3;L++){const x=OX+2+a*3+px+.5,z=OZ+12+b*4+pz+.5,y=.35+L*1.5;ip.add(x,y+.1,z,.96,.2,.96);iw.add(x,y+.8,z,.9,1.2,.9);}
+for(let a=0;a<10;a++)for(let b=0;b<5;b++)for(let px=0;px<3;px++)for(let pz=0;pz<4;pz++)for(let L=0;L<3;L++){const i=a*3+px,x=OX+(i<12?2+i:i<24?4+i:6+i)+.5,z=OZ+12+b*4+pz+.5,y=.35+L*1.5;ip.add(x,y+.1,z,.96,.2,.96);iw.add(x,y+.8,z,.9,1.2,.9);}
 // Selective 3x14 ตำแหน่ง ชั้นวาง 5 ชั้น
 const rk=inst(300,0xd04a3a),fr=inst(400,0x23476b);
-for(let c=0;c<3;c++)for(let r=0;r<14;r++){const x=OX+36+c+.5,z=OZ+12+r+.5;for(let L=0;L<5;L++){rk.add(x,.7+L*1.9,z,.9,1.1,.9);fr.add(x,.35+L*1.9,z,1,.1,1);}[[-.5,-.5],[.5,.5]].forEach(([a,b])=>fr.add(x+a,4.6,z+b,.06,9.6,.06));}
+for(let c=0;c<3;c++)for(let r=0;r<14;r++){const x=OX+[37.5,38.5,40.5][c],z=OZ+12+r+.5;for(let L=0;L<5;L++){rk.add(x,.7+L*1.9,z,.9,1.1,.9);fr.add(x,.35+L*1.9,z,1,.1,1);}[[-.5,-.5],[.5,.5]].forEach(([a,b])=>fr.add(x+a,4.6,z+b,.06,9.6,.06));}
 // AS/RS: 2 แถว สูง 30 ชั้น (สเกลย่อ)
 const ar=inst(400,0x5aa0e0),af=inst(200,0x1a3550);
 [[41,6],[43,5]].forEach(([c,n])=>{for(let r=0;r<n;r++){const x=OX+c+.5,z=OZ+12+r+.5;for(let L=0;L<30;L++)ar.add(x,.4+L*.42,z,.8,.32,.8);af.add(x,6.4,z,1.02,12.8,1.02);}});
-box(OX+42.5,6.5,OZ+12+3,.12,13,6.2,0xe0a800); // รางเครน AS/RS
+// เครน AS/RS (Stacker Crane) วิ่งในช่องกลางระหว่าง 2 แถวชั้นวาง (ตรงกับคอลัมน์ BG ในไฟล์)
+{const ax=OX+42.5,Y=M(0xffc400),Bk=M(0x2a2a2a),Or=M(0xff6a00),e=u=>u*u*(3-2*u);
+box(ax,0,OZ+15,.22,.08,6.4,0x555b62);box(ax,12.8,OZ+15,.16,.12,6.4,0x888e96);
+const cr=new THREE.Group();cr.position.set(ax,0,OZ+17.4);sc.add(cr);
+bxg(cr,0,.25,0,.8,.34,1.3,Y);bxg(cr,0,.08,0,.5,.12,1.5,Bk);[-.6,.6].forEach(z=>{bxg(cr,0,6.6,z,.2,12.9,.14,Y);bxg(cr,0,.5,z,.34,.3,.3,Or);});
+bxg(cr,0,13,0,.5,.22,1.5,Y);bxg(cr,0,12.8,0,.2,.2,.9,Bk);for(let k=1;k<12;k++)bxg(cr,0,k*1.05,0,.06,.06,1.2,Bk);
+const lf=new THREE.Group();cr.add(lf);bxg(lf,0,0,0,.7,.14,1.1,Or);[-.6,.6].forEach(z=>bxg(lf,0,.3,z,.3,.5,.3,Or));
+const fk=new THREE.Group();lf.add(fk);[-.3,.3].forEach(z=>bxg(fk,0,.12,z,.9,.06,.14,Bk));
+const pal=new THREE.Group();fk.add(pal);bxg(pal,0,.2,0,.85,.1,.85,M(0xc99a5b));bxg(pal,0,.7,0,.8,.9,.8,M(0x5aa0e0));
+box(ax,0,OZ+18.6,1.1,.32,1.5,0x555b62);box(ax,.32,OZ+18.6,1,.04,1.4,0x9aa3ab);
+const io=new THREE.Group();io.position.set(ax,.36,OZ+18.6);sc.add(io);bxg(io,0,.06,0,.85,.1,.85,M(0xc99a5b));bxg(io,0,.56,0,.8,.9,.8,M(0x5aa0e0));
+lab('AS/RS Crane (เครนสเตกเกอร์)',ax,15.8,OZ+15,.55,'#222','rgba(255,196,0,.95)');
+CUR.push(t=>{const n=Math.floor(t/16),u=t%16,st=n%2==0,r=(n*5+2)%6,s=n%2?1:-1,rr=s>0&&r>4?4:r,tz=OZ+12.5+rr,ty=.9+((n*7+3)%30)*.42,zI=OZ+17.4,yI=.6;
+let z=zI,y=yI,x=0;if(u>=1.5&&u<6.5){const k=e((u-1.5)/5);z=zI+(tz-zI)*k;y=yI+(ty-yI)*k;}else if(u>=6.5&&u<8.5){z=tz;y=ty;x=u<7.5?e(u-6.5):1-e(u-7.5);}else if(u>=8.5&&u<13.5){const k=e((u-8.5)/5);z=tz+(zI-tz)*k;y=ty+(yI-ty)*k;}
+cr.position.z=z;lf.position.y=y;fk.position.x=s*x;pal.visible=st?(u>=1.5&&u<7.5):(u>=7.5&&u<13.5);io.visible=st?u<1.5:u>=13.5;});}
 [iw,ip,rk,fr,ar,af].forEach(m=>m.instanceMatrix.needsUpdate=true);
 // Picking/Packing: โต๊ะแพ็ค 15 จุด, Packing Material: กล่อง, MHE: ที่จอดโฟล์คลิฟท์
 for(let i=0;i<15;i++){const x=OX+46+(i%5)*3.2,z=OZ+14+Math.floor(i/5)*2.8;box(x,0,z,2.4,1,1.1,0xf4f4f4);box(x,1,z,2.4,.2,1.1,0x8e8aa5);}
@@ -208,6 +232,7 @@ bld(15,92,4,3.6,1,0xdfe9f2,0x2e75b6,'จุดตรวจความปลอ�
 [12.4,14.6].forEach(x=>box(x,0,94,.2,2.4,.2,0x2e75b6));box(13.5,2.3,94,2.4,.25,.25,0x2e75b6);[12.9,14.1].forEach(x=>box(x,0,94,.12,1.1,.12,0x333));lab('ผ่านเกตตรวจ-สแกนบัตร',13.5,5.2,93.2,.6);
 bld(14.5,79,8,5,1,0xdddde8,0x2e75b6,'ที่นั่งคอยคนขับ',.7);
 P(23.5,78.5,3.5,6.5,0x9cc7e6,.2,.1);[23.5,27].forEach(x=>box(x,0,81.7,.2,3.6,.2,0x888));box(25.25,3.5,81.7,3.8,.2,.3,0x888);lab('ล้างรถ',25.2,6.5,81.7,.6);
+cctv(7.5,4.15,96.5,1.96,.3,.4);cctv(4.5,4.15,99.5,1.57,.3,.6);cctv(22.6,5,85.6,2.54,.5,.4,5);cctv(25.25,3.7,81.7,3.14,.35,.5);
 // ถนนบริการเก็บขยะ (แยกจากถนนรถบรรทุก) z 85.5-91.5
 P(12,85.5,22,6,0x55595f,.21,.1);for(let x=13;x<33;x+=4)L(x,88.45,2,.12,0xffffff);L(12,85.6,22,.15);L(12,91.3,22,.15);arr(20,87.5,1,0);arr(26,87.5,1,0);arr(20,89.5,-1,0);arr(26,89.5,-1,0);
 lab('ถนนบริการเก็บขยะ (แยกจากถนนรถบรรทุก)',23,3.6,88.5,.85,'#fff','rgba(47,158,88,.92)');
@@ -313,9 +338,22 @@ for(let i=0;i<5;i++){const p=ST(16.4,.53,26.3+.9*i,Math.PI,vc[i%5]);p.arms.forEa
 [19.4,23.2].forEach((tx,ti)=>{K(sc,tx,.53,27.4,.12,.72,.12,0x555555);K(sc,tx,1.25,27.4,2.4,.05,.9,0xe3d3b0);
 [-.6,.6].forEach((o,j)=>[[26.45,0],[28.35,Math.PI]].forEach(([z,ry],s)=>{const x=tx+o;K(sc,x,.53,z,.4,.46,.4,0x8a5a2b);const p=SP(sc,x,.53,z,ry,vc[(ti*4+j*2+s)%5]);const pz=z+(s?-.55:.55);K(sc,x,1.3,pz,.3,.02,.3,0xffffff);K(sc,x,1.32,pz,.18,.06,.18,0xf6f1e0);const ph=x+z;SIT.push(t=>{p.arms[1].rotation.x=Math.sin(t*1.6+ph)>.55?-1.9:-1;p.arms[0].rotation.x=-.9;});}));});
 [0,1].forEach(i=>{const p=person(vc[i+1]);p.userData={path:[[17.5,26.3],[17.5,30.3],[20.3,30.3]],d:i*9,sp:1.1,y0:.53};bxg(p,0,1,.45,.5,.03,.35,M(0x9aa3ab));PPL.push(p);});
+// ===== Unload / IB Check (ขาเข้า) และ OB Check / Loading (ขาออก): สินค้าจริง ตรวจจริง =====
+{const tm=(t,bg)=>{const g=document.createElement('canvas');g.width=256;g.height=64;const c=g.getContext('2d');c.fillStyle=bg;c.fillRect(0,0,256,64);c.fillStyle='#1a1a1a';c.font='bold 40px sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(t,128,34);return new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(g)});},
+gm=new THREE.PlaneGeometry(3.6,.9),T1=tm('UNLOAD','#e6c84f'),T2=tm('IB CHECK','#ffc000'),T3=tm('OB CHECK','#ffc000'),T4=tm('LOADING','#e6c84f'),gc=[0x3d8fd1,0xd04a3a,0x5aa0e0];
+const txt=(m,x,z)=>{const p=new THREE.Mesh(gm,m);p.rotation.x=-Math.PI/2;p.position.set(x,.39,z);sc.add(p);};
+const stk=(x,z,c,n)=>{for(let l=0;l<n;l++){box(x,.37+l*1.1,z,1.1,.14,1.1,0xc99a5b);box(x,.51+l*1.1,z,1,.95,1,c);}};
+const sh=(x,za,zb,off,c)=>{const f=forklift(0xf5b800,false),pl=new THREE.Group();f.add(pl);bxg(pl,0,.28,2,1,.14,1.1,M(0xc99a5b));bxg(pl,0,1,2,.9,1.3,.95,M(c));const L=zb-za,g=L/1.6,T=2*(g+1.5);
+CUR.push(t=>{const u=(t+off)%T;let z=za,fw=0;if(u<g){z=za+L*u/g;fw=1;}else if(u<g+1.5)z=zb;else if(u<2*g+1.5)z=zb-L*(u-g-1.5)/g;f.position.set(x,.32,z);f.rotation.y=(fw||u<g+1.5)?0:Math.PI;pl.visible=!!fw;});};
+const wk=(x,y,z,ry,k,scn)=>{const p=ST(x,y,z,ry,vc[k%5]);p.arms[1].rotation.x=-1.25;if(scn){bxg(p.arms[1],0,-.66,0,.08,.14,.05,M(0x222222));const ls=bxg(p,.33,1.25,.75,.02,.02,1,M(0xff2200));CUR.push(t=>{ls.visible=Math.sin(t*6+k)>-.2;p.rotation.y=ry+Math.sin(t*.8+k)*.15;});}else{bxg(p,.28,1.2,.3,.25,.02,.32,M(0xffffff));CUR.push(t=>{p.arms[1].rotation.x=-1.25+Math.sin(t*3+k)*.12;});}};
+dc.forEach((c,i)=>{const cx=OX+c+2.5,cc=gc[i%3],e=i%2==0;
+txt(T1,cx,OZ+4.5);txt(T2,cx,OZ+9.45);txt(T3,cx,OZ+34.55);txt(T4,cx,OZ+43.45);
+[-1.8,1.8].forEach((o,j)=>{stk(cx+o,OZ+1.8,cc,2);if(!e)stk(cx+o,OZ+3.3,cc,1+j);stk(cx+o,OZ+7.4,cc,2);stk(cx+o,OZ+37.2,cc,2);stk(cx+o,OZ+41.4,cc,j?1:2);});
+wk(cx-1.8,.37,OZ+8.6,Math.PI,i,1);wk(cx+1.8,.37,OZ+8.6,Math.PI,i+2,0);wk(cx-1.8,.37,OZ+35.5,0,i+1,1);wk(cx+1.8,.37,OZ+35.5,0,i+3,0);
+if(e)sh(cx,OZ+1.2,OZ+5.6,i*2,cc);else sh(cx,OZ+37,OZ+41.8,i*2+1,cc);});}
 // โฟล์คลิฟท์วิ่งในเส้นทางสีเขียว (วนในโซนเดิน)
 const FL2=[0,1,2].map(i=>{const f=forklift(0xf5b800,i!=1);f.userData={t:i*30};sc.add(f);return f;});
-const loops=[[[OX+3,OZ+13],[OX+60,OZ+13],[OX+60,OZ+19],[OX+3,OZ+19],[OX+3,OZ+13]],[[OX+34,OZ+16],[OX+34,OZ+33],[OX+3,OZ+33],[OX+3,OZ+34],[OX+34,OZ+34],[OX+34,OZ+16]],[[OX+3,OZ+32.8],[OX+62,OZ+32.8],[OX+62,OZ+33.7],[OX+3,OZ+33.7],[OX+3,OZ+32.8]]];
+const loops=[[[OX+36.5,OZ+11],[OX+44.5,OZ+11],[OX+44.5,OZ+20.2],[OX+42.5,OZ+20.2],[OX+42.5,OZ+22.4],[OX+44.5,OZ+22.4],[OX+44.5,OZ+26.5],[OX+36.5,OZ+26.5],[OX+36.5,OZ+11]],[[OX+15,OZ+11],[OX+29,OZ+11],[OX+29,OZ+33],[OX+15,OZ+33],[OX+15,OZ+11]],[[OX+3,OZ+32.8],[OX+62,OZ+32.8],[OX+62,OZ+33.7],[OX+3,OZ+33.7],[OX+3,OZ+32.8]]];
 let drill=false;function setDrill(on){drill=on;PPL.filter(p=>p.userData.stat).forEach((p,i)=>{const u=p.userData,x=p.position.x,z=p.position.z;u.rd=0;u.route=i<8?[[u.hx,u.hz],[98.5,u.hz],[98.5,OZ+29],[OX+W+.6,OZ+29],[104,59.2],[110+(i%4)*.9,57+Math.floor(i/4)*2.4]]:[[u.hx,u.hz],[u.hx,OZ+11],[OX+1,OZ+11],[OX+1,OZ+22],[OX-4,OZ+22],[32,55],[15+(i%4)*1.1,54.2+(i%3)*1.1]];u.rl=u.route.reduce((t,q,k)=>k?t+Math.hypot(q[0]-u.route[k-1][0],q[1]-u.route[k-1][1]):0,0);});}
 function along(path,s){let L=0;const seg=[];for(let i=0;i<path.length-1;i++){const l=Math.hypot(path[i+1][0]-path[i][0],path[i+1][1]-path[i][1]);seg.push(l);L+=l;}s=((s%L)+L)%L;for(let i=0;i<seg.length;i++){if(s<=seg[i]){const t=seg[i]?s/seg[i]:0;return[path[i][0]+(path[i+1][0]-path[i][0])*t,path[i][1]+(path[i+1][1]-path[i][1])*t,Math.atan2(path[i+1][0]-path[i][0],path[i+1][1]-path[i][1])];}s-=seg[i];}return[...path[path.length-1],0];}
 // ---------- UI ----------
@@ -324,6 +362,7 @@ function btn(t,f,tog){const b=document.createElement('button');b.textContent=t;b
 btn('ภาพรวมทั้งไซต์',()=>view([-70,105,165],[54,0,52]));
 btn('มองจากบน',()=>view([54,190,53],[54,0,52]));
 btn('ในคลังสินค้า',()=>{roof.visible=false;roofBtn.classList.remove('on');view([60,38,92],[68,0,52]);});
+btn('โซน C: AS/RS',()=>{roof.visible=false;roofBtn.classList.remove('on');view([98,24,66],[78.5,6,45]);});
 btn('ลานหน้าท่า',()=>view([30,22,-10],[60,0,22]));
 btn('ที่จอด/เกต',()=>view([-10,28,125],[20,0,80]));
 btn('ถนนใหญ่/ทางเข้า',()=>view([-45,34,150],[8,0,108]));
@@ -342,7 +381,7 @@ function rs(){const w=innerWidth,h=innerHeight;rd.setSize(w,h,false);cam.aspect=
 addEventListener('resize',rs);rs();
 // ---------- animation ----------
 const clk=new THREE.Clock();let T=0,st_t=0;
-function tick(){const dt=Math.min(clk.getDelta(),.05);T+=dt;SIT.forEach(f=>f(T));
+function tick(){const dt=Math.min(clk.getDelta(),.05);T+=dt;SIT.forEach(f=>f(T));CUR.forEach(f=>f(T));
 let blk=0;
 TR.forEach(t=>{const u=t.userData;if(u.t<0){u.t+=dt*10;t.visible=false;return;}t.visible=true;const a=u.p[u.i],b=u.p[u.i+1];if(!b){u.i=0;u.t=-(u.rep||60);u.prog=0;t.visible=false;t.position.set(u.p[0][0],0,u.p[0][1]);t.rotation.y=Math.PI/2;return;}if(u.w>0){u.w-=dt;return;}
 const dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz)||1,rev=b[2]=='r'||b[2]=='park';
